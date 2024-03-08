@@ -1,0 +1,40 @@
+.keybutton{
+    display: flex;
+    width: 80px;
+    height: 80px;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: var(--Button-Gap-Regular, 8px);
+
+    /*Label*/
+    color: #FFF;
+    font-family: "Open Sans";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 30px; /* 125% */
+
+}
+
+.keybutton.enabled{
+    background: var(--RoyalBlue, #4758DC);
+    cursor: pointer;
+}
+
+.keybutton.enabled:hover{
+    box-shadow: 0px 0px 12px 0px rgba(71, 88, 220, 0.40);
+}
+
+.keybutton.enabled:active {
+    background: var(--Lavender, #BB6BD9);
+  }
+  
+.keybutton.enabled.active{
+    background: var(--Lavender, #BB6BD9);
+}
+
+.keybutton.disabled{
+    background: var(--RoyalBlue, #8B9ACE);
+    cursor: not-allowed;
+}
