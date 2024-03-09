@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect} from 'react';
 import PowerSwitch from './powerSwitch/powerSwitch';
 import VolumeSlider from './volumeSlider/volumeSlider';
 import KeyButton from './keyButton/keyButton';
@@ -26,6 +26,30 @@ function App() {
     setPowerOff(!powerOff);
   }
 
+  const playAudio = (audioUrl) => {
+    if(!powerOff){
+      const audio = new Audio(audioUrl);
+      audio.play();
+    }
+    
+  };
+
+  const handleKeyDown = (event) => {
+    const pressedKey = event.key.toUpperCase();
+    const keyToPlay = keys.find((key) => key.label === pressedKey);
+    if (keyToPlay) {
+      playAudio(keyToPlay.url);
+    }
+  }
+
+  useEffect(()=>{
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+    };
+  },[]);
+
+
   return (
     <div className="App">
       
@@ -34,7 +58,7 @@ function App() {
         <VolumeSlider disabled={powerOff}></VolumeSlider>
         <div className='keypad'>
           {keys.map(
-            (key)=>(<KeyButton key={key.id} label={key.label} url={key.url} disabled={powerOff}></KeyButton>)
+            (key)=>(<KeyButton key={key.id} label={key.label} disabled={powerOff} onClick={() => playAudio(key.url)}></KeyButton>)
           )}  
         </div>
       </div>

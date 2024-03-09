@@ -7,6 +7,7 @@ export default {
 
 export const Enabled = {
     args:{
+        disabled:false,
         label: "Q",
         url: 'https://s3.amazonaws.com/freecodecamp/drums/Chord_1.mp3',
         
