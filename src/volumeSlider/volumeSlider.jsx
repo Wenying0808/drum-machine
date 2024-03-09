@@ -6,12 +6,13 @@ import Slider from '@mui/material/Slider';
 import VolumeDown from '@mui/icons-material/VolumeDown';
 import VolumeUp from '@mui/icons-material/VolumeUp';
 
-const VolumeSlider = ({disabled}) => {
+const VolumeSlider = ({disabled, onChange}) => {
   const [value, setValue] = React.useState(30);
   const isSmallScreen = useMediaQuery('(max-width:800px)');
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    onChange(newValue);
   };
 
   return (
