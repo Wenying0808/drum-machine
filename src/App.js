@@ -21,20 +21,25 @@ function App() {
   ];
 
   const [powerOff, setPowerOff] = useState(false);
+  const [volume, setVolume] = useState(0.5);
 
   const handlePowerChange = () => {
     setPowerOff(!powerOff);
-  }
+  };
+
+  const handleVolumeChange = (newValue) => {
+    setVolume(newValue/100);
+  };
 
   const playAudio = (audioUrl) => {
     if(!powerOff){
       const audio = new Audio(audioUrl);
+      audio.volume = volume;
       audio.play();
     }
     
   };
 
-  
 
   useEffect(()=>{
     const handleKeyDown = (event) => {
@@ -58,7 +63,7 @@ function App() {
       
       <div className='drum'>
         <PowerSwitch onClick={handlePowerChange} disabled={powerOff}></PowerSwitch>
-        <VolumeSlider disabled={powerOff}></VolumeSlider>
+        <VolumeSlider disabled={powerOff} onChange={handleVolumeChange}></VolumeSlider>
         <div className='keypad'>
           {keys.map(
             (key)=>(<KeyButton key={key.id} label={key.label} disabled={powerOff} onClick={() => playAudio(key.url)}></KeyButton>)
