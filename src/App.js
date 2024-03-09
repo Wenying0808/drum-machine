@@ -34,20 +34,23 @@ function App() {
     
   };
 
-  const handleKeyDown = (event) => {
-    const pressedKey = event.key.toUpperCase();
-    const keyToPlay = keys.find((key) => key.label === pressedKey);
-    if (keyToPlay) {
-      playAudio(keyToPlay.url);
-    }
-  }
+  
 
   useEffect(()=>{
+    const handleKeyDown = (event) => {
+      if(!powerOff){
+        const pressedKey = event.key.toUpperCase();
+        const keyToPlay = keys.find((key) => key.label === pressedKey);
+        if (keyToPlay) {
+          playAudio(keyToPlay.url);
+        }
+      }
+    } 
     window.addEventListener('keydown', handleKeyDown);
     return () => {
       window.removeEventListener('keydown', handleKeyDown)
     };
-  },[]);
+  },[powerOff, keys]);
 
 
   return (
